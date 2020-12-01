@@ -1,4 +1,53 @@
 #include <iostream>
+using namespace std;
+
+class ProductionLine
+{
+public:
+    ProductionLine(){}
+    virtual ~ProductionLine(){}
+    virtual void Product() = 0;
+};
+
+class AppleLine: public ProductionLine
+{
+public:
+    AppleLine(){}
+    ~AppleLine(){}
+
+  virtual void Product();
+};
+
+class BananaLine: public ProductionLine
+{
+public:
+    BananaLine(){}
+    ~BananaLine(){}
+
+    virtual void Product();
+};
+
+class Pear: public ProductionLine
+{
+public:
+    Pear(){}
+    ~Pear(){}
+
+    virtual void Product();
+};
+
+void AppleLine::Product()
+{
+    cout << "product apple!" << endl;
+}
+void BananaLine::Product()
+{
+    cout << "product banana!" << endl;
+}
+void Pear::Product()
+{
+    cout << "product pear!" << endl;
+}
 
 class SimpleFactory
 {
@@ -11,7 +60,7 @@ public:
     static SimpleFactory* GetInstance();
     ProductionLine *CreateProLine(TYPE type);
 private:
-    SimpleFactory();
+    SimpleFactory(){}
 };
 
 SimpleFactory *SimpleFactory::GetInstance()
@@ -35,54 +84,6 @@ ProductionLine *SimpleFactory::CreateProLine(TYPE type)
         break;
     }
     return proLine;
-}
-
-class ProductionLine
-{
-public:
-    ProductionLine();
-    virtual ~ProductionLine();
-    virtual void Product() = 0;
-};
-
-class AppleLine: public ProductionLine
-{
-public:
-    AppleLine();
-    ~AppleLine();
-
-  virtual void Product();
-};
-
-class BananaLine: public ProductionLine
-{
-public:
-    BananaLine();
-    ~BananaLine();
-
-    virtual void Product();
-};
-
-class Pear: public ProductionLine
-{
-public:
-    Pear();
-    ~Pear();
-
-    virtual void Product();
-};
-
-void AppleLine::Product()
-{
-    qDebug() << "product apple!";
-}
-void BananaLine::Product()
-{
-    qDebug() << "product banana!";
-}
-void Pear::Product()
-{
-    qDebug() << "product pear!";
 }
 
 int main()
