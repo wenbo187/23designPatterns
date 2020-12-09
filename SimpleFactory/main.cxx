@@ -9,6 +9,17 @@ public:
     virtual void Product() = 0;
 };
 
+class WwbLine: public ProductionLine
+{
+public:
+        WwbLine(){}
+        ~WwbLine(){}
+        virtual void Product()
+        {
+            cout << "WwbLine " << endl;
+        }
+};
+
 class AppleLine: public ProductionLine
 {
 public:
@@ -55,7 +66,8 @@ public:
     enum TYPE{
         APPLE,
         BANANA,
-        PEAR
+        PEAR,
+        WWB
     };
     static SimpleFactory* GetInstance();
     ProductionLine *CreateProLine(TYPE type);
@@ -82,6 +94,9 @@ ProductionLine *SimpleFactory::CreateProLine(TYPE type)
     case PEAR:
         proLine = new Pear();
         break;
+    case WWB:
+        proLine = new WwbLine();
+        break;
     }
     return proLine;
 }
@@ -92,6 +107,7 @@ int main()
     ProductionLine* line1 = factory->CreateProLine(SimpleFactory::APPLE);
     ProductionLine* line2 = factory->CreateProLine(SimpleFactory::BANANA);
     ProductionLine* line3 = factory->CreateProLine(SimpleFactory::PEAR);
+    ProductionLine* line4 = factory->CreateProLine(SimpleFactory::WWB);
 
     if(line1)
         line1->Product();
@@ -99,6 +115,8 @@ int main()
         line2->Product();
     if(line3)
         line3->Product();
+    if (line4)
+        line4->Product();
 
-	return 0;
+    return 0;
 }
